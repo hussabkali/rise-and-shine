@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,500;1,6..96,300;1,6..96,400;1,6..96,500&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -8,21 +8,20 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Jost', sans-serif;
-  --font-playfair: 'Cormorant Garamond', serif;
-  --font-mono: var(--font-geist-mono);
-  --font-heading: 'Cormorant Garamond', serif;
+  --font-sans: 'Raleway', sans-serif;
+  --font-playfair: 'Bodoni Moda', serif;
+  --font-mono: monospace;
+  --font-heading: 'Bodoni Moda', serif;
 
-  /* Salon tokens */
-  --color-ink:        #1A1410;
-  --color-ink-light:  #6B5F58;
-  --color-cream:      #FAFAF7;
-  --color-ivory:      #F5F0E8;
+  --color-ink:          #1A1410;
+  --color-ink-light:    #6B5F58;
+  --color-cream:        #FAFAF7;
+  --color-ivory:        #F5F0E8;
   --color-salon-border: #E8E2D9;
-  --color-rose:       #B5485A;
-  --color-rose-soft:  #E8C4CC;
-  --color-gold:       #B8965A;
-  --color-gold-soft:  #EDD9A3;
+  --color-rose:         #B5485A;
+  --color-rose-soft:    #E8C4CC;
+  --color-gold:         #B8965A;
+  --color-gold-soft:    #EDD9A3;
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -101,9 +100,8 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
     overflow-x: hidden;
-    cursor: none;
   }
   html {
     scroll-behavior: smooth;
@@ -112,7 +110,7 @@
 
 @layer utilities {
   .font-playfair {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Bodoni Moda', serif;
   }
 }
 
@@ -128,19 +126,11 @@
 /* Scroll reveal */
 .sr {
   opacity: 0;
-  transform: translateY(36px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .sr.vis { opacity: 1; transform: translateY(0); }
 .sr.d1 { transition-delay: 0.1s; }
 .sr.d2 { transition-delay: 0.2s; }
 .sr.d3 { transition-delay: 0.3s; }
 .sr.d4 { transition-delay: 0.4s; }
-
-/* Custom cursor */
-#cur   { position: fixed; width: 8px; height: 8px; background: #B5485A; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .25s, height .25s; }
-#cur-r { position: fixed; width: 32px; height: 32px; border: 1px solid #B5485A; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .3s, height .3s; opacity: .5; }
-
-/* Marquee */
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee-track { animation: marquee 28s linear infinite; }
