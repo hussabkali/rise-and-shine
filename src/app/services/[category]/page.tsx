@@ -11,11 +11,15 @@ interface PageProps {
 
 function useScrollReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll('.sr');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
-    }, { threshold: 0.08 });
-    els.forEach(el => obs.observe(el));
+    const run = () => {
+      const els = document.querySelectorAll('.sr, .sr-zoom');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+      }, { threshold: 0.06 });
+      els.forEach(el => obs.observe(el));
+      return obs;
+    };
+    const obs = run();
     return () => obs.disconnect();
   }, []);
 }
@@ -87,7 +91,7 @@ export default function CategoryPage({ params }: PageProps) {
           </h2>
         </div>
         <Link
-          href="/#booking"
+          href="/book"
           className="flex-shrink-0 inline-block px-8 py-3.5 bg-[#B5485A] text-white text-[0.68rem] tracking-[0.18em] uppercase font-medium hover:bg-[#9A3048] transition-colors no-underline"
         >
           Book Now
@@ -116,12 +120,12 @@ function GroupSection({ group, index }: { group: ServiceGroup; index: number }) 
         </span>
       </div>
 
-      {/* Service cards — clean, no images */}
+      {/* Service cards — zoom in on scroll, staggered */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-        {group.services.map((svc) => (
+        {group.services.map((svc, si) => (
           <div
             key={svc.name}
-            className="group/card bg-white border border-[#E8E2D9] hover:border-[#B5485A] hover:shadow-[0_8px_30px_rgba(181,72,90,0.08)] transition-all duration-300 p-6 flex flex-col justify-between min-h-[180px]"
+            className={`sr-zoom d${Math.min((si % 6) + 1, 6)} group/card bg-white border border-[#E8E2D9] hover:border-[#B5485A] hover:shadow-[0_12px_40px_rgba(181,72,90,0.1)] hover:-translate-y-0.5 transition-all duration-300 p-6 flex flex-col justify-between min-h-[180px]`}
           >
             <div>
               <div className="flex items-start gap-2 mb-3">
@@ -136,10 +140,10 @@ function GroupSection({ group, index }: { group: ServiceGroup; index: number }) 
             </div>
 
             <div className="mt-5 flex items-center justify-between">
-              <span className="font-playfair text-[1.1rem] font-light text-[#1A1410]">{svc.price}</span>
+              <span className="font-playfair text-[1.15rem] font-light text-[#1A1410]">{svc.price}</span>
               <Link
-                href="/#booking"
-                className="text-[0.6rem] tracking-[0.16em] uppercase font-semibold px-4 py-2 border border-[#1A1410] text-[#1A1410] no-underline opacity-0 group-hover/card:opacity-100 hover:bg-[#B5485A] hover:border-[#B5485A] hover:text-white transition-all duration-200"
+                href="/book"
+                className="text-[0.6rem] tracking-[0.16em] uppercase font-semibold px-4 py-2 border border-[#E8E2D9] text-[#6B5F58] no-underline opacity-0 group-hover/card:opacity-100 group-hover/card:border-[#1A1410] group-hover/card:text-[#1A1410] hover:!bg-[#B5485A] hover:!border-[#B5485A] hover:!text-white transition-all duration-200"
               >
                 Book
               </Link>

@@ -9,10 +9,10 @@ import { CATEGORIES, CATEGORY_ORDER } from '@/lib/services-data';
 /* ─── Scroll Reveal ─── */
 function useScrollReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll('.sr');
+    const els = document.querySelectorAll('.sr, .sr-zoom');
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.07 });
     els.forEach(el => obs.observe(el));
     return () => obs.disconnect();
   }, []);
@@ -98,18 +98,21 @@ function CategoriesSection() {
             <Link
               key={key}
               href={`/services/${key}`}
-              className={`sr d${Math.min(i + 1, 4)} group bg-[#FAFAF7] hover:bg-white p-8 md:p-10 flex flex-col justify-between min-h-[220px] no-underline transition-colors duration-300`}
+              className={`sr-zoom d${i + 1} group relative bg-[#FAFAF7] hover:bg-white p-8 md:p-10 flex flex-col justify-between min-h-[240px] no-underline transition-colors duration-300 overflow-hidden`}
             >
-              <div className="flex items-start justify-between">
-                <span className="font-playfair text-[0.72rem] text-[#B8965A] font-light">{CAT_NUMBERS[key]}</span>
-                <div className="w-7 h-7 border border-[#E8E2D9] group-hover:border-[#B5485A] group-hover:bg-[#B5485A] flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
-                  <svg className="w-3 h-3 stroke-white fill-none" strokeWidth={2} viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
+              {/* Hover reveal — "View all services" bar at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 h-0 group-hover:h-10 bg-[#B5485A] flex items-center justify-center gap-2 overflow-hidden transition-all duration-300">
+                <span className="text-[0.6rem] tracking-[0.18em] uppercase text-white font-medium whitespace-nowrap">View all {cat.count} services</span>
+                <svg className="w-3 h-3 stroke-white fill-none flex-shrink-0" strokeWidth={2} viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </div>
 
-              <div>
+              <div className="flex items-start justify-between">
+                <span className="font-playfair text-[0.72rem] text-[#B8965A] font-light italic">{CAT_NUMBERS[key]}</span>
+              </div>
+
+              <div className="pb-2">
                 <h3 className="font-playfair text-[1.7rem] md:text-[2rem] font-light text-[#1A1410] group-hover:text-[#B5485A] transition-colors duration-300 leading-tight mb-3">
                   {cat.title}
                 </h3>

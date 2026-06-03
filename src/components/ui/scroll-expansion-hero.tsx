@@ -36,6 +36,20 @@ export default function ScrollExpandHero({
     return () => window.removeEventListener('resize', check);
   }, []);
 
+  // If navigated here with #booking hash, skip hero and jump to booking
+  useEffect(() => {
+    if (window.location.hash === '#booking') {
+      progressRef.current = 1;
+      expandedRef.current = true;
+      setScrollProgress(1);
+      setMediaFullyExpanded(true);
+      setShowContent(true);
+      setTimeout(() => {
+        document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
+
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (expandedRef.current && e.deltaY < 0 && window.scrollY <= 5) {
