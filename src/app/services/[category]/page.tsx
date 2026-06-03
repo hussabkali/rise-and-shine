@@ -1,27 +1,13 @@
 'use client';
 
-import { use, useState, useEffect } from 'react';
+import { use, useState } from 'react';
 import Link from 'next/link';
 import { CATEGORIES } from '@/lib/services-data';
 import type { ServiceGroup } from '@/lib/services-data';
+import { useScrollReveal } from '@/lib/useScrollReveal';
 
 interface PageProps {
   params: Promise<{ category: string }>;
-}
-
-function useScrollReveal() {
-  useEffect(() => {
-    const run = () => {
-      const els = document.querySelectorAll('.sr, .sr-zoom');
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
-      }, { threshold: 0.06 });
-      els.forEach(el => obs.observe(el));
-      return obs;
-    };
-    const obs = run();
-    return () => obs.disconnect();
-  }, []);
 }
 
 export default function CategoryPage({ params }: PageProps) {
@@ -46,7 +32,7 @@ export default function CategoryPage({ params }: PageProps) {
     <div className="min-h-screen bg-[#FAFAF7]">
 
       {/* Page header */}
-      <div className="pt-36 pb-12 px-6 md:px-14 border-b border-[#E8E2D9]">
+      <div className="pt-28 md:pt-36 pb-10 md:pb-12 px-6 md:px-14 border-b border-[#E8E2D9]">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-[0.65rem] tracking-[0.18em] uppercase text-[#6B5F58] hover:text-[#B5485A] transition-colors mb-10 no-underline font-medium"
@@ -76,7 +62,7 @@ export default function CategoryPage({ params }: PageProps) {
       </div>
 
       {/* Groups */}
-      <div className="px-6 md:px-14 py-14 space-y-14">
+      <div className="px-6 md:px-14 py-10 md:py-14 space-y-10 md:space-y-14">
         {cat.groups.map((group, i) => (
           <GroupSection key={group.id} group={group} index={i} />
         ))}
@@ -121,7 +107,7 @@ function GroupSection({ group, index }: { group: ServiceGroup; index: number }) 
       </div>
 
       {/* Service cards — zoom in on scroll, staggered */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
         {group.services.map((svc, si) => (
           <div
             key={svc.name}

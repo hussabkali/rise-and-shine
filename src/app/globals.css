@@ -126,23 +126,39 @@
 /* Scroll reveal — slide up */
 .sr {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .sr.vis { opacity: 1; transform: translateY(0); }
 
 /* Scroll reveal — zoom in */
 .sr-zoom {
   opacity: 0;
-  transform: scale(0.93) translateY(20px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.95) translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .sr-zoom.vis { opacity: 1; transform: scale(1) translateY(0); }
 
-/* Stagger delays */
-.sr.d1, .sr-zoom.d1 { transition-delay: 0.05s; }
-.sr.d2, .sr-zoom.d2 { transition-delay: 0.12s; }
-.sr.d3, .sr-zoom.d3 { transition-delay: 0.19s; }
-.sr.d4, .sr-zoom.d4 { transition-delay: 0.26s; }
-.sr.d5, .sr-zoom.d5 { transition-delay: 0.33s; }
-.sr.d6, .sr-zoom.d6 { transition-delay: 0.40s; }
+/* Stagger delays — desktop */
+.sr.d1, .sr-zoom.d1 { transition-delay: 0.04s; }
+.sr.d2, .sr-zoom.d2 { transition-delay: 0.09s; }
+.sr.d3, .sr-zoom.d3 { transition-delay: 0.14s; }
+.sr.d4, .sr-zoom.d4 { transition-delay: 0.19s; }
+.sr.d5, .sr-zoom.d5 { transition-delay: 0.24s; }
+.sr.d6, .sr-zoom.d6 { transition-delay: 0.29s; }
+
+/* Mobile — simpler, faster, no stagger */
+@media (max-width: 768px) {
+  .sr {
+    transform: translateY(16px);
+    transition-duration: 0.5s;
+  }
+  .sr-zoom {
+    transform: scale(0.97) translateY(10px);
+    transition-duration: 0.5s;
+  }
+  .sr.d1, .sr.d2, .sr.d3, .sr.d4, .sr.d5, .sr.d6,
+  .sr-zoom.d1, .sr-zoom.d2, .sr-zoom.d3, .sr-zoom.d4, .sr-zoom.d5, .sr-zoom.d6 {
+    transition-delay: 0s;
+  }
+}

@@ -5,18 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ScrollExpandHero from '@/components/ui/scroll-expansion-hero';
 import { CATEGORIES, CATEGORY_ORDER } from '@/lib/services-data';
-
-/* ─── Scroll Reveal ─── */
-function useScrollReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll('.sr, .sr-zoom');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
-    }, { threshold: 0.07 });
-    els.forEach(el => obs.observe(el));
-    return () => obs.disconnect();
-  }, []);
-}
+import { useScrollReveal } from '@/lib/useScrollReveal';
 
 /* ─── About ─── */
 function AboutSection() {
@@ -98,7 +87,7 @@ function CategoriesSection() {
             <Link
               key={key}
               href={`/services/${key}`}
-              className={`sr-zoom d${i + 1} group relative bg-[#FAFAF7] hover:bg-white p-8 md:p-10 flex flex-col justify-between min-h-[240px] no-underline transition-colors duration-300 overflow-hidden`}
+              className={`sr-zoom d${i + 1} group relative bg-[#FAFAF7] hover:bg-white p-8 md:p-10 flex flex-col justify-between min-h-[190px] md:min-h-[240px] no-underline transition-colors duration-300 overflow-hidden`}
             >
               {/* Hover reveal — "View all services" bar at bottom */}
               <div className="absolute bottom-0 left-0 right-0 h-0 group-hover:h-10 bg-[#B5485A] flex items-center justify-center gap-2 overflow-hidden transition-all duration-300">

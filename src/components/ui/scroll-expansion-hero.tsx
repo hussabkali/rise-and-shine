@@ -176,15 +176,15 @@ export default function ScrollExpandHero({
               </div>
 
               {/* Title — splits left / right */}
-              <div className="relative z-10 flex flex-col items-center gap-2 pointer-events-none">
+              <div className="relative z-10 flex flex-col items-center gap-1 md:gap-2 pointer-events-none px-4 text-center">
                 <h1
-                  className="font-playfair text-[clamp(3rem,6.5vw,6rem)] font-normal text-[#FAF6F0] italic leading-tight will-change-transform"
+                  className="font-playfair text-[clamp(2.4rem,10vw,6rem)] font-light text-[#FAF6F0] italic leading-tight will-change-transform"
                   style={{ transform: `translateX(-${tx}vw)`, opacity: Math.max(0, 1 - scrollProgress * 1.6) }}
                 >
                   {titleLine1}
                 </h1>
                 <h1
-                  className="font-playfair text-[clamp(3rem,6.5vw,6rem)] font-normal text-[#FAF6F0] leading-tight will-change-transform"
+                  className="font-playfair text-[clamp(2.4rem,10vw,6rem)] font-light text-[#FAF6F0] leading-tight will-change-transform"
                   style={{ transform: `translateX(${tx}vw)`, opacity: Math.max(0, 1 - scrollProgress * 1.6) }}
                 >
                   {titleLine2}
@@ -193,27 +193,27 @@ export default function ScrollExpandHero({
 
               {/* Scroll hint */}
               <div
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
                 style={{ opacity: Math.max(0, 1 - scrollProgress * 6) }}
               >
-                <div className="w-[18px] h-[28px] border border-white/30 rounded-[9px] relative">
-                  <span className="absolute top-[5px] left-1/2 -translate-x-1/2 w-[3px] h-[5px] bg-[#B8965A] rounded-full animate-bob" />
+                <div className="w-[16px] h-[26px] border border-white/30 rounded-[8px] relative">
+                  <span className="absolute top-[5px] left-1/2 -translate-x-1/2 w-[3px] h-[4px] bg-[#B8965A] rounded-full animate-bob" />
                 </div>
-                <span className="text-[0.62rem] tracking-[0.2em] uppercase text-white/45">Scroll to reveal</span>
+                <span className="text-[0.58rem] tracking-[0.2em] uppercase text-white/40">Scroll</span>
               </div>
 
               {/* CTA after full expansion */}
               {subtitle && (
                 <motion.div
-                  className="absolute bottom-[12vh] left-1/2 -translate-x-1/2 text-center whitespace-nowrap z-20"
+                  className="absolute bottom-[10vh] left-1/2 -translate-x-1/2 text-center z-20 w-full px-6"
                   animate={{ opacity: showContent ? 1 : 0 }}
                   transition={{ duration: 0.7 }}
                   style={{ pointerEvents: showContent ? 'all' : 'none' }}
                 >
-                  <p className="text-[0.8rem] tracking-[0.2em] uppercase text-[rgba(250,246,240,0.6)] mb-6">{subtitle}</p>
+                  <p className="text-[0.72rem] tracking-[0.2em] uppercase text-[rgba(250,246,240,0.55)] mb-5">{subtitle}</p>
                   <a
-                    href="#booking"
-                    className="inline-block px-10 py-4 bg-[#B5485A] text-white text-[0.72rem] tracking-[0.15em] uppercase font-medium hover:bg-[#9A3048] transition-colors"
+                    href="/book"
+                    className="inline-block px-8 py-3.5 bg-[#B5485A] text-white text-[0.68rem] tracking-[0.15em] uppercase font-medium hover:bg-[#9A3048] transition-colors"
                   >
                     Reserve Your Visit
                   </a>
